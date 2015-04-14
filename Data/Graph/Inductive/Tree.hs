@@ -1,3 +1,5 @@
+{-# LANGUAGE DeriveGeneric #-}
+
 -- (c) 1999 - 2002 by Martin Erwig [see file COPYRIGHT]
 -- | Tree-based implementation of 'Graph' and 'DynGraph'
 --
@@ -15,12 +17,14 @@ import           Data.List           (foldl', sort)
 import           Data.Map            (Map)
 import qualified Data.Map            as M
 import           Data.Maybe          (fromMaybe)
+import           GHC.Generics        (Generic)
 
 ----------------------------------------------------------------------
 -- GRAPH REPRESENTATION
 ----------------------------------------------------------------------
 
 newtype Gr a b = Gr (GraphRep a b)
+  deriving (Generic)
 
 type GraphRep a b = Map Node (Context' a b)
 type Context' a b = (Adj b,a,Adj b)

@@ -1,4 +1,4 @@
-{-# LANGUAGE BangPatterns, ScopedTypeVariables #-}
+{-# LANGUAGE BangPatterns, DeriveGeneric, ScopedTypeVariables #-}
 
 -- |An efficient implementation of 'Data.Graph.Inductive.Graph.Graph'
 -- using big-endian patricia tree (i.e. "Data.IntMap").
@@ -31,12 +31,14 @@ import           Data.IntMap         (IntMap)
 import qualified Data.IntMap         as IM
 import           Data.List           (sort)
 import           Data.Maybe          (fromMaybe)
+import           GHC.Generics        (Generic)
 
 ----------------------------------------------------------------------
 -- GRAPH REPRESENTATION
 ----------------------------------------------------------------------
 
 newtype Gr a b = Gr (GraphRep a b)
+  deriving (Generic)
 
 type GraphRep a b = IntMap (Context' a b)
 type Context' a b = (IntMap [b], a, IntMap [b])
